@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Salesforce Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0 auto;
+            width: 400px;
+            padding-top: 100px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #008CBA;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+            text-align: center;
+            width: 100%;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #005e7c;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Login</h1>
+    <form method="post" action="{{ url_for('login') }}">
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username" required><br>
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" required><br>
+        <label for="security_token">Security Token:</label>
+        <input type="text" name="security_token" id="security_token" required><br>
+        <input type="submit" value="Connect with Salesforce">
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,7 @@
+flask
+simple-salesforce
+opencv-python
+face-recognition
+numpy
+pickle-mixin
+gunicorn

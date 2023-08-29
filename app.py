@@ -55,11 +55,15 @@ def login():
     username = request.form['username']
     password = request.form['password']
     security_token = request.form['security_token']
+    faceRecognition = request.form.get('faceRecognition', 'off')
 
     try:
         sf = Salesforce(username=username, password=password, security_token=security_token)
         session['sf'] = pickle.dumps(sf)
-        return redirect(url_for('capture'))
+        if faceRecognition == 'on':
+            return redirect(url_for('capture'))
+        else:
+            return "Face recognition can't be performed if camera access is not granted.", 400
     except Exception as e:
         return str(e)
 

@@ -1,17 +1,26 @@
-from flask import Flask, render_template, Response,  request, redirect, url_for
+from flask import Flask, render_template, Response, request, redirect, url_for
 from simple_salesforce import Salesforce
 import cv2
 import face_recognition
 import numpy as np
 from flask import session
 import pickle
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 app.config['SECRET_KEY'] = 'mysecretkey' 
 
 def generate_frame():
     camera = cv2.VideoCapture(0)
+    if not camera.isOpened():
+        print("Could not open camera")
+        return None
     ret, frame = camera.read()
+    if not ret:
+        print("Could not read frame")
+        camera.release()
+        return None
     camera.release()
     if not ret:
         return None
@@ -84,6 +93,7 @@ def success():
 @app.route('/failure')
 def failure():
     return "Login Failed!"
+
 
 if __name__ == '__main__':
     app.run(debug=True)

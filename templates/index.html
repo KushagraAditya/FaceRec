@@ -14,6 +14,7 @@
 
         h1 {
             color: #333;
+            text-align: center;
         }
 
         form {
@@ -21,19 +22,48 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
         }
 
         label {
             font-weight: bold;
+            display: block;
+            margin-top: 10px;
         }
 
         input[type="text"],
-        input[type="password"] {
-            width: 100%;
+        input[type="password"],
+        input[type="checkbox"]+label {
+            width: 90%;
             padding: 10px;
             margin: 10px 0;
             border: 1px solid #ccc;
             border-radius: 4px;
+        }
+
+        input[type="checkbox"] {
+            display: none;
+        }
+
+        input[type="checkbox"]+label {
+            display: flex;
+            align-items: center;
+        }
+
+        input[type="checkbox"]+label::before {
+            content: '';
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 8px;
+            background-color: white;
+        }
+
+        input[type="checkbox"]:checked+label::before {
+            background-color: #008CBA;
+            border-color: #008CBA;
         }
 
         input[type="submit"] {
@@ -45,6 +75,7 @@
             border-radius: 4px;
             text-align: center;
             width: 100%;
+            margin-top: 20px;
         }
 
         input[type="submit"]:hover {
@@ -57,13 +88,20 @@
     <h1>Login</h1>
     <form method="post" action="{{ url_for('login') }}">
         <label for="username">Username:</label>
-        <input type="text" name="username" id="username" required><br>
+        <input type="text" name="username" id="username" required>
+
         <label for="password">Password:</label>
-        <input type="password" name="password" id="password" required><br>
+        <input type="password" name="password" id="password" required>
+
         <label for="security_token">Security Token:</label>
-        <input type="text" name="security_token" id="security_token" required><br>
+        <input type="text" name="security_token" id="security_token" required>
+
+        <input type="checkbox" id="faceRecognition" name="faceRecognition">
+        <label for="faceRecognition">I agree to camera access for face recognition</label>
+
         <input type="submit" value="Connect with Salesforce">
     </form>
+
 </body>
 
 </html>

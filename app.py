@@ -8,12 +8,19 @@ import pickle
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app, resources={r"/api/*": {"origins": "https://your-salesforce-domain.com"}})
+CORS(app)
 app.config['SECRET_KEY'] = 'mysecretkey' 
 
 def generate_frame():
     camera = cv2.VideoCapture(0)
+    if not camera.isOpened():
+        print("Could not open camera")
+        return None
     ret, frame = camera.read()
+    if not ret:
+        print("Could not read frame")
+        camera.release()
+        return None
     camera.release()
     if not ret:
         return None

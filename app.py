@@ -32,14 +32,11 @@ def generate_frame():
     else:
         return None
 
-
 def verify_face(face_encoding):
     if 'sf' not in session:
         return False
     sf = pickle.loads(session['sf'])
-
     try:
-        # Query
         query_string = "SELECT Id, Face_data__c FROM User_Account__c"
         query_result = sf.query_all(query_string)
         for record in query_result['records']:
@@ -65,7 +62,6 @@ def login():
     password = request.form['password']
     security_token = request.form['security_token']
     faceRecognition = request.form.get('faceRecognition', 'off')
-
     try:
         sf = Salesforce(username=username, password=password, security_token=security_token)
         session['sf'] = pickle.dumps(sf)
